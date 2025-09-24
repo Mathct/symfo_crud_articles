@@ -1,0 +1,26 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+
+<a href="{{path('articles')}}">Retour</a>
+
+<section>
+        <h2>{{article.title}}</h2>
+        <p>Contenu: {{article.content}}</p>
+        <p>Status: {{article.status}}</p>
+        <span>Date de création: {{ article.createdAt|date('d/m/Y H:i') }}</span>
+        <span>Date de modification :
+        {% if article.updatedAt %}
+            {{ article.updatedAt|date('d/m/Y H:i') }}
+        {% else %}
+            aucune
+        {% endif %}
+        </span>
+        <br>
+        <a href="{{ path('article_edit', { id: article.id }) }}">
+        <button>Modifier</button>
+        </a>
+        {% include "articles/_delete_article.html.twig" %}
+</section>
+
+{% endblock %}
