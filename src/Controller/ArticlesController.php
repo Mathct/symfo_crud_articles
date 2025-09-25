@@ -20,7 +20,6 @@ final class ArticlesController extends AbstractController
         
         $articles = $ArticlesRepo->findBy([], ["createdAt" => "DESC"]);
         
-       
         return $this->render('articles/index.html.twig', [
             'articles' => $articles
         ]);
