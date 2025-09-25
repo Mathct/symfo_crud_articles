@@ -17,9 +17,9 @@ final class ArticlesController extends AbstractController
     #[Route('/', name: 'articles', methods:['GET'])]
     public function index(ArticlesRepository $ArticlesRepo): Response
     {
-
-        $articles = $ArticlesRepo->findAll();
-
+        
+        $articles = $ArticlesRepo->findBy([], ["createdAt" => "DESC"]);
+        
        
         return $this->render('articles/index.html.twig', [
             'articles' => $articles
@@ -84,7 +84,7 @@ final class ArticlesController extends AbstractController
     #[Route('/edit/{id}', name:'article_edit', methods:['GET', 'POST'])]
     public function edit(int $id, Request $request, Articles $article, EntityManagerInterface $em): Response //Pokemon $pokemon permet de se passer de $pokemon = $PokemonRepo->findOneBy(["id" => $id]);
     {
-        $date = new \DateTime('now', new \DateTimeZone('Europe/Paris'));
+        $date = new \DateTimeImmutable('now', new \DateTimeZone('Europe/Paris'));
         $article->setUpdatedAt($date);
         $form = $this->createForm(ArticleType::class, $article);
 
