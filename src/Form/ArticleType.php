@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Type;
 
 class ArticleType extends AbstractType
 {
@@ -23,6 +25,11 @@ class ArticleType extends AbstractType
                 3 => 3,
             ],
             ])
+            ->add('type', EntityType::class, [
+            'class' => Type::class, // entité liée
+            'choice_label' => 'name', // la propriété de ton entité Type qui sera affichée dans le menu
+            'placeholder' => 'Choisir un type', // optionnel
+        ])
             ->add('submit', SubmitType::class)
         ;
     }

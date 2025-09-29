@@ -14,6 +14,7 @@
 
 {% for article in articles %}
     <section>
+    {{ article.type.name }}
         <h2>{{article.title}}</h2>
         <p>Status: {{article.status}}</p>
         <span>Date de création: {{ article.createdAt|date('d/m/Y H:i') }}</span>
