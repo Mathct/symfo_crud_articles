@@ -32,6 +32,11 @@ class Articles
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Type $type = null;
+
+
 
 
 
@@ -110,4 +115,19 @@ class Articles
         return $this;
     }
 
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+   
+
+  
 }
